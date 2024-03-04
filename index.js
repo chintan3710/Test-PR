@@ -1,8 +1,10 @@
 const express = require("express");
 
+const serverlessHttp = require("serverless-http");
+
 const path = require("path");
 
-const port = 8002;
+// const port = 8002;
 
 const app = express();
 
@@ -14,8 +16,10 @@ app.get("/", (req, res) => {
     return res.render("home");
 });
 
-app.listen(port, (err) => {
+const handler = serverlessHttp(app);
+
+app.listen(handler, (err) => {
     err
         ? console.log("Server not responding")
-        : console.log(`Server respond successfully at port: ${port}`);
+        : console.log(`Server respond successfully at port`);
 });
